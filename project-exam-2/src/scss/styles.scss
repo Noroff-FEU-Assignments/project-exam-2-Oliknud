@@ -1,0 +1,10 @@
+@import "~bootstrap/scss/bootstrap";
+@import "./partials/pages/home";
+@import "./partials/layout/footer";
+@import "./partials/layout/navigation";
+
+$primary-color: #338EAB;
+
+body {
+    background-color: #FCFCFC;
+}

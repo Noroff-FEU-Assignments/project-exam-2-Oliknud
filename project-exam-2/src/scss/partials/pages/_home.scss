@@ -1,0 +1,34 @@
+.home-hero-image {
+    display: flex;
+    background-image: url(../../../images/hero-image.png);
+    height: 100vh;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.hotel-search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.532);
+    padding: 60px 40px;
+    max-width: 800px;
+    width: 80%;
+    border-radius: 8px;
+    button {
+        width: 200px;
+        padding: 10px;
+        background-color: #338EAB;
+        border: none;
+        color: white;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    button:hover {
+        background-color: #2d7a94;
+    }
+}

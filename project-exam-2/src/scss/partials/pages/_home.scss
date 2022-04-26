@@ -1,6 +1,8 @@
 .home-hero-image {
     display: flex;
     background-image: url(../../../images/hero-image.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 100vh;
     position: relative;
     align-items: center;
@@ -31,4 +33,9 @@
     button:hover {
         background-color: #2d7a94;
     }
+}
+
+.featured-sub {
+    display: flex;
+    justify-content: space-between;
 }

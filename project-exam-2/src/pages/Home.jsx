@@ -19,18 +19,18 @@ function Home() {
 
         <Container className='featured'>
           <HotelCarousel />
-        </Container>
 
-        <Container>
-          <div className='home-featured'>
-            <img src="" alt="featured hotels" />
-          </div>
-          <div className='home-featured'>
-            <img src="" alt="featured hotels" />
-          </div>
-          <div className='home-featured'>
-            <img src="" alt="featured hotels" />
-          </div>
+          <Container className='featured-sub'>
+            <div className='home-featured'>
+              <img src="" alt="featured hotels" />
+            </div>
+            <div className='home-featured'>
+              <img src="" alt="featured hotels" />
+            </div>
+            <div className='home-featured'>
+              <img src="" alt="featured hotels" />
+            </div>
+          </Container>
         </Container>
     </>
   )

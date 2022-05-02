@@ -1,0 +1,1 @@
+export const url = "https://polar-plateau-90468.herokuapp.com/api/hotels/";

@@ -15,27 +15,23 @@
     align-items: center;
     position: absolute;
     margin: 0 auto;
-    background-color: rgba(0, 0, 0, 0.532);
-    padding: 60px 40px;
+    background-color: rgba(0, 0, 0, 0.418);
+    padding: 40px;
     max-width: 800px;
     width: 80%;
     border-radius: 8px;
-    button {
-        width: 200px;
-        padding: 10px;
-        background-color: #338EAB;
-        border: none;
-        color: white;
-        border-radius: 8px;
-        margin-top: 20px;
-    }
-
-    button:hover {
-        background-color: #2d7a94;
-    }
 }
 
 .featured-sub {
     display: flex;
     justify-content: space-between;
+    padding: 0;
+    .home-featured {
+        max-width: 300px;
+        
+        img {
+            border-radius: 8px;
+            width: 100%;
+        }
+    }
 }

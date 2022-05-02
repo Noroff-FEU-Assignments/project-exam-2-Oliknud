@@ -1,16 +1,50 @@
-import React from 'react'
+import {React , useState, useEffect} from 'react'
 import { InputGroup, FormControl, Container} from "react-bootstrap";
 import searchIcon from "../images/search.svg"
 import HotelCarousel from '../components/carousel';
+import { url } from '../components/api';
+// import Hotels from './Hotels';
 
 function Home() {
+  const [hotels, setHotel] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+
+  useEffect(function () {
+    async function fetchData() {
+      try {
+        const res = await fetch(url);
+        if (res.ok) {
+          const json = await res.json();
+          setHotel(json.data);
+        } else {
+          setError("Error..");
+        }
+      } catch (error) {
+        setError(error.toString());
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading</div>
+  }
+
+  if (error) {
+    return <div>Error</div>
+  }
+ 
   return (
     <>
         <div className='home-hero-image'>
             <div className='hotel-search'>
-              <InputGroup size="lg">
-                <InputGroup.Text id="inputGroup-sizing-lg"><img src={searchIcon} alt="search-icon" /></InputGroup.Text>
-                <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" />
+              <InputGroup size="sm">
+                <InputGroup.Text id="inputGroup-sizing-sm"><img src={searchIcon} alt="search-icon" /></InputGroup.Text>
+                <FormControl aria-label="small" aria-describedby="inputGroup-sizing-sm" />
               </InputGroup>
               
               <button>Search</button>
@@ -21,15 +55,9 @@ function Home() {
           <HotelCarousel />
 
           <Container className='featured-sub'>
-            <div className='home-featured'>
-              <img src="" alt="featured hotels" />
-            </div>
-            <div className='home-featured'>
-              <img src="" alt="featured hotels" />
-            </div>
-            <div className='home-featured'>
-              <img src="" alt="featured hotels" />
-            </div>
+            {hotels.filter(hotel => hotel.attributes.featured ? true : false).map(filteredHotel => (
+              <div className='home-featured' key={filteredHotel.id} ><img alt={filteredHotel.attributes.image_alt_text} src={filteredHotel.attributes.image_url}></img></div>
+            ))}
           </Container>
         </Container>
     </>

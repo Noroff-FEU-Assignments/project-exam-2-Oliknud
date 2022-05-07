@@ -3,6 +3,7 @@ import { InputGroup, FormControl, Container} from "react-bootstrap";
 import searchIcon from "../images/search.svg"
 import HotelCarousel from '../components/carousel';
 import { url } from '../components/api';
+import logo from "../images/logo.svg";
 // import Hotels from './Hotels';
 
 function Home() {
@@ -41,7 +42,9 @@ function Home() {
   return (
     <>
         <div className='home-hero-image'>
+          <img src={logo} className="front-logo" alt="logo" />
             <div className='hotel-search'>
+              
               <InputGroup size="sm">
                 <InputGroup.Text id="inputGroup-sizing-sm"><img src={searchIcon} alt="search-icon" /></InputGroup.Text>
                 <FormControl aria-label="small" aria-describedby="inputGroup-sizing-sm" />

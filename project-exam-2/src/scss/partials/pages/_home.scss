@@ -1,12 +1,19 @@
 .home-hero-image {
     display: flex;
-    background-image: url(../../../images/hero-image.png);
+    background-image: url(../../../images/hotel-background2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    height: 95vh;
+    background-position-y: -40px;
     position: relative;
     align-items: center;
     justify-content: center;
+}
+
+.front-logo {
+    width: 300px;
+    top: 150px;
+    position: absolute;
 }
 
 .hotel-search {

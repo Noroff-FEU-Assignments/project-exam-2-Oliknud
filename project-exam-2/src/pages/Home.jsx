@@ -50,7 +50,7 @@ function Home() {
                 <FormControl aria-label="small" aria-describedby="inputGroup-sizing-sm" />
               </InputGroup>
               
-              <button>Search</button>
+              <button className='primary-button'>Search</button>
             </div>
         </div>
 

@@ -1,0 +1,30 @@
+.hotel-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card {
+    margin-top: 40px;
+    box-shadow: 0px 5px 15px -3px rgba(0,0,0,0.2);
+    border: none;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    button {
+        width: 80px;
+        align-self: flex-end;
+        margin: 0;
+    }
+}
+
+.card-text {
+    margin: 0;
+}
+
+.hotel-list-search {
+    max-width: 400px;
+}

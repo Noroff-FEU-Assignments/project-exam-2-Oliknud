@@ -32,10 +32,11 @@
 .featured-sub {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     padding: 0;
     .home-featured {
         max-width: 300px;
-        
+        margin-top: 40px;
         img {
             border-radius: 8px;
             width: 100%;

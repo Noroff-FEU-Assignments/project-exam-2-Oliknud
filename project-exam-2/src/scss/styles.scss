@@ -1,9 +1,14 @@
 @import "~bootstrap/scss/bootstrap";
+
 @import "./partials/pages/home";
+@import "./partials/pages/hotelList";
+
 @import "./partials/layout/footer";
 @import "./partials/layout/navigation";
+
 @import "./partials/carousel";
 @import "./partials/button";
+
 
 $primary-color: #338EAB;
 

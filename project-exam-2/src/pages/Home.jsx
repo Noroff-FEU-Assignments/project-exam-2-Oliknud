@@ -1,5 +1,6 @@
 import {React , useState, useEffect} from 'react'
 import { InputGroup, FormControl, Container} from "react-bootstrap";
+// import { Link } from 'react-router-dom';
 import searchIcon from "../images/search.svg"
 import HotelCarousel from '../components/carousel';
 import { url } from '../components/api';
@@ -10,7 +11,7 @@ function Home() {
   const [hotels, setHotel] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
 
   useEffect(function () {
     async function fetchData() {

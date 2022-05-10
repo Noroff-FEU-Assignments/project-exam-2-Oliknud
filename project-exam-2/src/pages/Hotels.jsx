@@ -1,4 +1,5 @@
 import {React , useState, useEffect} from 'react'
+import {Link} from "react-router-dom";
 import { Container, InputGroup, FormControl, Card} from "react-bootstrap";
 import { url } from '../components/api';
 import searchIcon from "../images/search.svg"
@@ -7,7 +8,6 @@ function Hotels() {
   const [hotels, setHotel] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
 
   useEffect(function () {
     async function fetchData() {
@@ -51,7 +51,7 @@ function Hotels() {
               <Card.Body>
                 <Card.Title>{hotel.attributes.hotel_name}</Card.Title>
                 <Card.Text>Price: {hotel.attributes.price} kr</Card.Text>
-                <button className='primary-button'>View</button>
+                <Link to={`/${hotel.id}`} className='primary-button'>View</Link>
               </Card.Body>
             </Card>
             ))}

@@ -9,6 +9,8 @@ import Hotels from "./pages/Hotels";
 import Footer from './components/footer';
 import Contact from './pages/Contact';
 import Detail from './pages/HotelDetail';
+import Booking from './pages/Booking';
+import AdminLogin from './pages/AdminLogin';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/hotels" element={<Hotels />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/:id" element={<Detail />} />
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/login" element={<AdminLogin />} />
       </Routes>
 
       <Footer />

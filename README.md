@@ -61,6 +61,8 @@ Week 7: Bug Fixing
 End of week 3: Functional specification, Gantt chart, style guide, and Adobe XD prototype
 End of week 7: Report with link to website, and all files in a compressed ZIP
 
+<!-- .......................................................................................... -->
+
 ## Option 2: Hotel Booking Website
 A local tourism agency in Bergen is launching a new website called ‘Holidaze’ for visitors to the area to be able to find hotels, B&Bs and guesthouses, and for the accommodation owners to receive enquiries.
 

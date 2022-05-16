@@ -35,7 +35,7 @@ function Hotels() {
   if (error) {
     return <div>Error</div>
   }
- 
+
   return (
     <>
         <Container className='hotel-list-search'>
@@ -44,8 +44,11 @@ function Hotels() {
               <FormControl aria-label="small" aria-describedby="inputGroup-sizing-sm" />
             </InputGroup>
         </Container>
+
         <Container className='hotel-list'>
+
             {hotels.map(hotel => (
+  
               <Card key={hotel.id} style={{ width: '18rem' }}>
               <Card.Img variant="top" src={hotel.attributes.image_url} />
               <Card.Body>

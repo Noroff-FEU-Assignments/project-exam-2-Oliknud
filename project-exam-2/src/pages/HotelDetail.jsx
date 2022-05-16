@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { url } from "../components/api";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Container } from 'react-bootstrap';
 
 function Details() {
@@ -46,11 +46,12 @@ function Details() {
 
   return (
     <>
-      <Container>
+      <Container className='hotel-details'>
         <h1>{hotel.hotel_name}</h1>
         <img src={hotel.image_url} alt={hotel.image_alt_text}/>
         <p>{hotel.description}</p>
         <p>{hotel.price} kr</p>
+        <Link to={`/booking`} className='primary-button'>Book hotel</Link>
       </Container>
         
     

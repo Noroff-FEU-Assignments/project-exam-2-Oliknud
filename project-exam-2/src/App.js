@@ -11,22 +11,24 @@ import Contact from './pages/Contact';
 import Detail from './pages/HotelDetail';
 import Booking from './pages/Booking';
 import AdminLogin from './pages/AdminLogin';
+import Admin from './pages/Admin';
 
 function App() {
   return (
     <>
       <Navigation />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/hotels" element={<Hotels />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/:id" element={<Detail />} />
-        <Route path="/booking" element={<Booking />} />
-        <Route path="/login" element={<AdminLogin />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/hotels" element={<Hotels />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/:id" element={<Detail />} />
+          <Route path="/booking" element={<Booking />} />
+          <Route path="/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<Admin />} />
+        </Routes>
 
-      <Footer />
+        <Footer />
     </>
   );
 }

@@ -1,95 +1,86 @@
-import { React, useState } from 'react'
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-// import { saveUser, saveToken } from '../components/localStorage';
+// import {  useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { auth_url } from '../components/api';
+// import AuthContext from "../components/authContext";
+import { useNavigate } from 'react-router-dom';
+import { saveToken, saveUser } from '../components/localStorage';
 
-const schema = yup.object().shape({
-    email: yup.string().required("Enter email").email("Enter valid email address"),
-    password: yup.string().required("Enter password").min(5, "Enter valid password"),
-})
 
-function AdminLogin() {
-    // const url = "https://polar-plateau-90468.herokuapp.com/api/auth/local"
-    // const loginData = JSON.stringify({identifier: email, password: password});
 
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
+const loginSchema = yup.object().shape({
+  identifier: yup.string().required('Please enter your email').email("Please enter valid email address"),
+  password: yup.string().required('Please enter your password')
+});
 
-    // const options = {
-    //     method: "POST",
-    //     body: loginData,
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     }
-    // };
+const AdminLogin = () => {
+//   const [submitting, setSubmitting] = useState(false);
+//   const [loginError, setLoginError] = useState(null);
+//   const [passwordError, setPasswordError] = useState(null)
 
-    // try {
-    //     const response = await fetch(url, options);
-    //     const json = await response.json();
-    //     if (json.user) {
-    //         saveToken(json.jwt);
-    //         saveUser(json.user);
-    //     }
+  let history = useNavigate();
+
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(loginSchema)
+  });
+
+  console.log(errors)
+
+  const onSubmit = async (data) => {
+    // setSubmitting(true);
+    // setLoginError(null);
+    
+    const parsedData = JSON.stringify(data)
+    
+    const options = {
+        method: "POST",
+        body: parsedData,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+
+    try {
+      const response = await fetch(auth_url, options);
+
+      if (response.status === 400 ) {
+          throw new Error("Invalid email or password")
+      }
+
+      const json = await response.json();
+      console.log(json)
+      if (json.user) {
+        saveToken(json.jwt);
+        saveUser(json.user);
+        history("/admin");
+      }
+      
+    } catch (error) {
+      console.log('error', error);
+      
+    //   setLoginError(error.toString());
+    } finally {
         
-    // }
-    // catch (error) {
-    //     console.log(error)
-    // }
-
-    const { register, handleSubmit, formState: { errors }} = useForm({
-        resolver: yupResolver(schema),
-    });
-
-    function onSubmit(data) {
-        setEmail(data.email)
-        setPassword(data.password)
-        console.log(email, password);
+        
     }
+  };
 
-    return (
-        <>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input {...register("email")} />
-                {errors.email && <span>{errors.email.message}</span>}
+  return (
+    <>
+      <div className='formbox'>
+      <form onSubmit={handleSubmit(onSubmit)}>
+            <input name='identifier' placeholder="Enter email" {...register("identifier")} />
+            {errors.identifier && <span>{errors.identifier.message}</span>}
 
-                <input {...register("password", { required: true })} />
-                {errors.password && <span>This field is required</span>}
+            <input type="password" name='password' placeholder='Enter password'{...register("password")} />
+            {errors.password && <span></span>}
 
-                <button>Send</button>
-            </form>
-        </>
-    )
-}
+            <button type='submit'>Send</button>
+        </form>
+      </div>
+    </>
+  );
+};
 
-export default AdminLogin
-
-
-
-
-
-
-
-
-    // const [email, setEmail] = useState(() => {
-    //     const saved = localStorage.getItem("email");
-    //     const initValue = JSON.parse(saved);
-
-    //     return initValue || "";
-    // });
-
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
-    // console.log(email);
-
-    // function handleSubmit (e) {
-    //     e.preventDefault();
-    //     console.log("submitted")
-    //     localStorage.setItem("email", JSON.stringify(email));
-    // }
-    // console.log(email)
-
-    // useEffect(() => {
-    //     localStorage.setItem("email", JSON.stringify(email));
-    //     localStorage.setItem("password", JSON.stringify(password));
-    //   }, [email, password]);
+export default AdminLogin;

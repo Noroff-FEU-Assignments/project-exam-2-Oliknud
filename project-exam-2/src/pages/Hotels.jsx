@@ -54,7 +54,7 @@ function Hotels() {
               <Card.Body>
                 <Card.Title>{hotel.attributes.hotel_name}</Card.Title>
                 <Card.Text>Price: {hotel.attributes.price} kr</Card.Text>
-                <Link to={`/${hotel.id}`} className='primary-button'>View</Link>
+                <Link to={`/hotel/${hotel.id}`} className='primary-button'>View</Link>
               </Card.Body>
             </Card>
             ))}

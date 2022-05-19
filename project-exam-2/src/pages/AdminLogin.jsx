@@ -1,9 +1,9 @@
-// import {  useState } from 'react';
+import {  useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { auth_url } from '../components/api';
-// import AuthContext from "../components/authContext";
+import AuthContext from "../components/authContext";
 import { useNavigate } from 'react-router-dom';
 import { saveToken, saveUser } from '../components/localStorage';
 
@@ -18,7 +18,7 @@ const AdminLogin = () => {
 //   const [submitting, setSubmitting] = useState(false);
 //   const [loginError, setLoginError] = useState(null);
 //   const [passwordError, setPasswordError] = useState(null)
-
+const [, setAuth] = useContext(AuthContext);
   let history = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -53,6 +53,7 @@ const AdminLogin = () => {
       if (json.user) {
         saveToken(json.jwt);
         saveUser(json.user);
+        setAuth(json.jwt)
         history("/admin");
       }
       

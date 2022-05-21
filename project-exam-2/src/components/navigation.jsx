@@ -1,21 +1,12 @@
-import { React, useEffect, useState }from 'react'
+import { React, useContext }from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import {  getUser } from "../components/localStorage";
-import { AuthProvider } from "../components/authContext";
+import AuthContext, { AuthProvider } from "../components/authContext";
 
 function Navigation() {
-  const [auth, setAuth] = useState(null)
-  useEffect(() => {
-    setAuth(getUser);
-  },[auth])
-  
-  console.log(auth)
-  
+  const [auth, setAuth] = useContext(AuthContext);
   function logout() {
     setAuth(null);
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
   }
 
   return (
@@ -30,10 +21,9 @@ function Navigation() {
                       <Nav.Link as={Link} to={"/hotels"}>Hotels</Nav.Link>
                       <Nav.Link as={Link} to={"/contact"}>Contact</Nav.Link>
                       
-
                       {auth ? (
                         <>
-                          <Nav.Link as={Link} to={"/"} onClick={logout}>Log out</Nav.Link>
+                          <Nav.Link onClick={logout}>Log out</Nav.Link>
                           <Nav.Link as={Link} to={"/admin"}>Admin</Nav.Link>
                         </>
                         
@@ -42,8 +32,6 @@ function Navigation() {
                               <Nav.Link as={Link} to={"/login"}>Login</Nav.Link>
                             </>
                           )}
-                      
-                      
                   </Nav>
               </Navbar.Collapse>
           </Container>

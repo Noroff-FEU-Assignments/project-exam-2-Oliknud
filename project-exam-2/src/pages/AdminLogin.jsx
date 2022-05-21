@@ -1,18 +1,10 @@
 import {  useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import { auth_url } from '../components/api';
 import AuthContext from "../components/authContext";
 import { useNavigate } from 'react-router-dom';
-import { saveToken, saveUser } from '../components/localStorage';
-
-
-
-const loginSchema = yup.object().shape({
-  identifier: yup.string().required('Please enter your email').email("Please enter valid email address"),
-  password: yup.string().required('Please enter your password')
-});
+import { loginSchema } from '../components/formSchema';
 
 const AdminLogin = () => {
 //   const [submitting, setSubmitting] = useState(false);
@@ -25,12 +17,9 @@ const [, setAuth] = useContext(AuthContext);
     resolver: yupResolver(loginSchema)
   });
 
-  console.log(errors)
-
   const onSubmit = async (data) => {
     // setSubmitting(true);
     // setLoginError(null);
-    
     const parsedData = JSON.stringify(data)
     
     const options = {
@@ -47,22 +36,14 @@ const [, setAuth] = useContext(AuthContext);
       if (response.status === 400 ) {
           throw new Error("Invalid email or password")
       }
-
       const json = await response.json();
-      console.log(json)
-      if (json.user) {
-        saveToken(json.jwt);
-        saveUser(json.user);
-        setAuth(json.jwt)
-        history("/admin");
-      }
-      
+      setAuth(json)
     } catch (error) {
       console.log('error', error);
       
     //   setLoginError(error.toString());
     } finally {
-        
+        history("/");
         
     }
   };

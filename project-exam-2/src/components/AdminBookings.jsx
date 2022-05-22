@@ -2,14 +2,15 @@ import { React, useState, useEffect, useContext }from 'react'
 import { Accordion } from 'react-bootstrap'
 import { booking_url } from './api';
 import { AuthContext } from './authContext';
+import { deleteBooking } from "../components/delete";
 
-function Bookings() {
+function AdminBookings() {
     const [bookings, setBooking] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [auth] = useContext(AuthContext);
     useEffect(() => {
-        const fetchContact = async () => {
+        const fetchBookings = async () => {
           try {
             const res = await fetch(booking_url);
             const json = await res.json();
@@ -27,31 +28,10 @@ function Bookings() {
             setLoading(false);
           }
         }
-        fetchContact();
+        fetchBookings();
       },[]);
 
-      const deleteBooking = async (id) => {
-        
-        const data = JSON.stringify(id);
-        console.log(data)
-        const options = {
-            method: "DELETE",
-            body: data,
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${auth.jwt}`,
-            },
-        };
-
-        try {
-            const response = await fetch(`${booking_url}/${id}`, options);
-            const json = await response.json();
-            
-        }
-        catch (error) {
-            console.log(error)
-        }
-      }
+      
 
       if (loading) {
         return <div>Loading</div>
@@ -70,7 +50,7 @@ function Bookings() {
           const bookingNumber = bookings.indexOf(booking);
           return (
             <Accordion.Item eventKey={booking.id} key={booking.id}>
-                <Accordion.Header>Booking {bookingNumber}</Accordion.Header>
+                <Accordion.Header>Booking {bookingNumber + 1}</Accordion.Header>
                 <Accordion.Body>
                     <p>Hotel: {bookingAttr.hotel_name}</p>
                     <p>Name: {bookingAttr.full_name}</p>
@@ -79,8 +59,13 @@ function Bookings() {
                     <p>Guests: {bookingAttr.guests}</p>
                     <p>Email: {bookingAttr.email}</p>
                     <p>Phone number: {bookingAttr.phone_number}</p>
+                    <button className='primary-button' onClick={() => {
+                        const deleteConfirmation = window.confirm("Delete booking?");
+                        if (deleteConfirmation) {
+                            deleteBooking(booking.id, auth.jwt)}
+                        }
+                        }>Delete</button>
                 </Accordion.Body>
-                <button onClick={() => {deleteBooking(booking.id)}}>Delete</button>
             </Accordion.Item>
           )
         })}
@@ -90,4 +75,4 @@ function Bookings() {
     )
 }
 
-export default Bookings
+export default AdminBookings

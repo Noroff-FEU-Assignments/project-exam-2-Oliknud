@@ -8,7 +8,7 @@ function Contact() {
   const [contact, setContact] = useState(null)
   console.log(contact);
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(contactSchema)
   });
 
@@ -33,8 +33,7 @@ function Contact() {
       
     //   setLoginError(error.toString());
     } finally {
-        
-        
+        reset()
     }
   };
 
@@ -42,10 +41,10 @@ function Contact() {
     <div className='contact-form'>
       <form onSubmit={handleSubmit(onSubmit)}>
             <input name='first_name' placeholder='First name' {...register("first_name")}/>
-            {errors.firstName && <span>{errors.firstName.message}</span>}
+            {errors.first_name && <span>{errors.first_name.message}</span>}
 
             <input name='last_name' placeholder='Last name' {...register("last_name")}/>
-            {errors.lastName && <span>{errors.lastName.message}</span>}
+            {errors.last_name && <span>{errors.last_name.message}</span>}
 
             <input name='email' placeholder="Enter email" {...register("email")} />
             {errors.email && <span>{errors.email.message}</span>}
@@ -55,7 +54,7 @@ function Contact() {
 
             <button type='submit'>Send</button>
         </form>
-      </div>
+    </div>
   )
 }
 

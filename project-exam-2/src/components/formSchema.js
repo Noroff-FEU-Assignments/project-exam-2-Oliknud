@@ -22,8 +22,11 @@ export const bookingSchema = yup.object().shape({
 });
 
 export const addHotelSchema = yup.object().shape({
-    title: yup.string().required('Please provide a title'),
-    price: yup.number().required('Please provide a price'),
-    description: yup.string().required('Please provide description'),
-    image_url: yup.string().required('Please provide an image URL')
+    hotel_name: yup.string().required('Please enter hotel name'),
+    price: yup.number().required('Please enter price'),
+    description: yup.string().required('Please enter description'),
+    image_url: yup.string().required('Please enter an image URL'),
+    image_alt_text: yup.string().required("Pleace enter image alt text"),
+    featured: yup.boolean(false),
+    slide_image: yup.boolean(false)
 });

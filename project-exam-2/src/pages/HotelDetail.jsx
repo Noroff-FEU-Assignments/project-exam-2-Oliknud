@@ -15,7 +15,7 @@ function Details() {
     history.push("/");
   }
 
-  const newUrl = url + id;
+  const newUrl = url + "/" + id;
 
   useEffect(() => {
       async function fetchData() {
@@ -53,8 +53,6 @@ function Details() {
         <p>{hotel.price} kr</p>
         <Link to={`/booking`} className='primary-button'>Book hotel</Link>
       </Container>
-        
-    
     </>
   )
 }

@@ -1,13 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { contact_url } from '../components/api';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { contactSchema } from "../components/formSchema";
 
 function Contact() {
-  const [contact, setContact] = useState(null)
-  console.log(contact);
-
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(contactSchema)
   });
@@ -24,14 +21,10 @@ function Contact() {
     };
 
     try {
-      const response = await fetch(contact_url, options);
-      const json = await response.json();
-      setContact(json)
-      console.log(json)
+      await fetch(contact_url, options);
+
     } catch (error) {
       console.log('error', error);
-      
-    //   setLoginError(error.toString());
     } finally {
         reset()
     }

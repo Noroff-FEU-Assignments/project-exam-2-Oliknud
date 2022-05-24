@@ -13,12 +13,13 @@ export const contactSchema = yup.object().shape({
 });
 
 export const bookingSchema = yup.object().shape({
-    name: yup.string().required('Please provide a first name'),
-    lastname: yup.string().required('Please provide a last name'),
+    full_name: yup.string().required('Please provide a first name'),
     email: yup.string().required("Please enter your email").email("Please enter a valid email address"),
-    hotel: yup.string().required('Please provide a hotel name'),
+    hotel_name: yup.string().required('Please provide a hotel name'),
     guests: yup.number().required('Please provide number of guests'),
-    date: yup.string().required('Please provide when you want to book')
+    // from: yup.string().required('Please provide when you want to book'),
+    // to: yup.string().required('Please provide when you want to book'),
+    phone_number: yup.string().required('Please provide when you want to book')
 });
 
 export const addHotelSchema = yup.object().shape({

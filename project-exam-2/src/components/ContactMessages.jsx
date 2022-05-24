@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext} from 'react';
-import { contact_url } from '../components/api';
+import { contact_url } from './api';
 import AuthContext from './authContext';
 import { Accordion } from 'react-bootstrap';
-import { deleteMessage } from "../components/delete";
+import { deleteFunction } from "./deleteFunction";
 
 function ContactMessages() {
     const [auth] = useContext(AuthContext);
@@ -56,7 +56,8 @@ function ContactMessages() {
                     <button className='primary-button' onClick={() => {
                         const deleteConfirmation = window.confirm("Delete booking?");
                         if (deleteConfirmation) {
-                            deleteMessage(contact.id, auth.jwt)}
+                            deleteFunction(contact_url, contact.id, auth.jwt)}
+                            console.log(contact_url, contact.id)
                         }
                         }>Delete</button>
                 </Accordion.Body>

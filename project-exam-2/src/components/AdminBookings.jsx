@@ -2,7 +2,7 @@ import { React, useState, useEffect, useContext }from 'react'
 import { Accordion } from 'react-bootstrap'
 import { booking_url } from './api';
 import { AuthContext } from './authContext';
-import { deleteBooking } from "../components/delete";
+import { deleteFunction } from "./deleteFunction";
 
 function AdminBookings() {
     const [bookings, setBooking] = useState([]);
@@ -62,7 +62,7 @@ function AdminBookings() {
                     <button className='primary-button' onClick={() => {
                         const deleteConfirmation = window.confirm("Delete booking?");
                         if (deleteConfirmation) {
-                            deleteBooking(booking.id, auth.jwt)}
+                            deleteFunction(booking_url, booking.id, auth.jwt)}
                         }
                         }>Delete</button>
                 </Accordion.Body>

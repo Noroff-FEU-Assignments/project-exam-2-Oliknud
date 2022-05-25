@@ -52,32 +52,32 @@ function Admin() {
   return (
     <>
       <Container>
-        <div>Admin</div>
+        <h1>Admin</h1>
         
         <ContactMessages />
         <AdminBookings />
 
         <div className='add-hotel-form'>
           <form onSubmit={handleSubmit(onSubmit)}>
-              <input name='hotel_name' placeholder='Hotel name' {...register("hotel_name")}/>
+              <input name='hotel_name' className='form-control' placeholder='Hotel name' {...register("hotel_name")}/>
               {errors.hotel_name && <span>{errors.hotel_name.message}</span>}
 
-              <input name='description' placeholder='Description' {...register("description")}/>
+              <input name='description' className='form-control' placeholder='Description' {...register("description")}/>
               {errors.description && <span>{errors.description.message}</span>}
 
-              <input name='image_url' placeholder="Image url" {...register("image_url")} />
+              <input name='image_url' className='form-control' placeholder="Image url" {...register("image_url")} />
               {errors.image_url && <span>{errors.image_url.message}</span>}
 
-              <input name='image_alt_text' placeholder="Image alt text" {...register("image_alt_text")} />
+              <input name='image_alt_text' className='form-control' placeholder="Image alt text" {...register("image_alt_text")} />
               {errors.image_alt_text && <span>{errors.image_alt_text.message}</span>}
 
-              <input type="price" name='message' placeholder='Price'{...register("price")} />
+              <input type="price" className='form-control' name='message' placeholder='Price'{...register("price")} />
               {errors.price && <span>{errors.price.message}</span>}
 
               <input type="checkbox" name="featured" {...register("featured")} />
               <input type="checkbox" name="slide_image" {...register("slide_image")} />
 
-              <button type='submit'>Send</button>
+              <button type='submit' className='primary-button'>Add hotel</button>
           </form>
         </div>
         <AdminHotelList />

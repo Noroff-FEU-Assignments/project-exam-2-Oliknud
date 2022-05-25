@@ -1,26 +1,35 @@
-import { React, useState }from 'react'
+import { React, useEffect, useState }from 'react'
 import { Container, Form, Row, Col, Button } from 'react-bootstrap';
 import { bookingSchema } from "../components/formSchema";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm, Controller } from 'react-hook-form';
-import { booking_url } from '../components/api';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { useForm } from 'react-hook-form';
+import { booking_url, url } from '../components/api';
 
 function Booking() {
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
-    console.log(startDate.toDateString())
-
-    const { control, watch, register, handleSubmit, formState: { errors } } = useForm({
+    const [error, setError] = useState(null);
+    const [hotels, setHotels] = useState([]);
+    
+    const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(bookingSchema)
     });
-    console.log(watch(control))
+
+    // Fetch hotel name for hotel select
+    useEffect(() => {
+        async function fetchName() {
+            try {
+                const res = await fetch(url);
+                const json = await res.json();
+                setHotels(json.data)
+            }
+            catch (error) {
+                setError(error.toString());
+            }
+        }
+        fetchName();
+    }, []);
 
     const onSubmit = async (data) => {
-        console.log(data)
         const parsedData = JSON.stringify({data:data})
-        console.log(parsedData)
 
         const options = {
             method: "POST",
@@ -41,6 +50,13 @@ function Booking() {
         }
     };
 
+    if (error) {
+        return <div>Error</div>
+    }
+
+    // Dates before todays date deactivated
+    const formatYmd = (date) => date.toISOString().slice(0, 10);
+
     return (
         <Container className='booking'>
             <Form className='booking-form' onSubmit={handleSubmit(onSubmit)}>
@@ -48,27 +64,26 @@ function Booking() {
                 <Row className="mb-3">
                     <Form.Group as={Col} xs={6} controlId="formGridHotelName">
                         <Form.Label>Hotel name</Form.Label>
-                        <Form.Control placeholder='Hotel name' {...register("hotel_name")} />
+                        <Form.Select defaultValue="" {...register("hotel_name")}>
+                            <option value="" disabled >Choose...</option>
+                            {hotels.map(hotel => (
+                                <option key={hotel.id}>{hotel.attributes.hotel_name}</option>
+                            ))}
+                            
+                        </Form.Select>
                         {errors.hotel_name && <span>{errors.hotel_name.message}</span>}
                     </Form.Group>
-                    
-                    <Controller control={control} name="from" render={({ field }) => {
-                        <DatePicker selected={field.value} onChange={(date) => field.onChange(date)} />
-                    }}/>
-
-
 
                     <Form.Group as={Col} controlId="formGridDate">
                         <Form.Label>From</Form.Label>
-
-                        
-
+                        <input className='form-control' type="date" min={formatYmd(new Date())} {...register("from")} />
+                        {errors.hotel_name && <span>{errors.hotel_name.message}</span>}
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridDate">
                         <Form.Label>To</Form.Label>
-                        {/* <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} /> */}
-                        
+                        <input className='form-control' type="date" min={formatYmd(new Date())} {...register("to")} />
+                        {errors.hotel_name && <span>{errors.hotel_name.message}</span>}
                     </Form.Group>
                 </Row>
 

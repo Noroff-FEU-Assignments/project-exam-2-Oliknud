@@ -38,16 +38,23 @@ function Home() {
   if (error) {
     return <div>Error</div>
   }
- 
+
   return (
     <>
         <div className='home-hero-image'>
           <img src={logo} className="front-logo" alt="logo" />
+
             <div className='hotel-search'>
+              
               <InputGroup size="sm">
                 <InputGroup.Text id="inputGroup-sizing-sm"><img src={searchIcon} alt="search-icon" /></InputGroup.Text>
                 <FormControl aria-label="small" aria-describedby="inputGroup-sizing-sm" />
               </InputGroup>
+              {hotels.map((hotel) => {
+                return (
+                  <p key={hotel.id}>{hotel.attributes.hotel_name}</p>
+                )
+              })}
               <button className='primary-button'>Search</button>
             </div>
         </div>

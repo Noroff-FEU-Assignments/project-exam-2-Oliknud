@@ -41,10 +41,9 @@ function AdminBookings() {
         return <div>Error</div>
       }
 
-     
-
     return (
         <Accordion defaultActiveKey="0" flush>
+        <h4>Bookings</h4>
         {bookings.map((booking) => {
           const bookingAttr = booking.attributes;
           const bookingNumber = bookings.indexOf(booking);

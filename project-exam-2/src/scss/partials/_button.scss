@@ -31,3 +31,20 @@
     background-color: #942d2d;
     color: white;
 }
+
+.success-button {
+    width: 200px;
+    padding: 10px;
+    background-color: #11851a;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.success-button:disabled {
+    background-color: #11851a;
+    color: white;
+}

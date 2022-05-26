@@ -1,16 +1,17 @@
-import {  useContext } from 'react';
+import {  useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { auth_url } from '../components/api';
 import AuthContext from "../components/authContext";
 import { useNavigate } from 'react-router-dom';
 import { loginSchema } from '../components/formSchema';
+import { Container, Form, Row, Button } from 'react-bootstrap';
 
 const AdminLogin = () => {
-//   const [submitting, setSubmitting] = useState(false);
-//   const [loginError, setLoginError] = useState(null);
-//   const [passwordError, setPasswordError] = useState(null)
-const [, setAuth] = useContext(AuthContext);
+  const [submitting, setSubmitting] = useState(false);
+  const [loginError, setLoginError] = useState(null);
+
+  const [, setAuth] = useContext(AuthContext);
   let history = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -18,8 +19,8 @@ const [, setAuth] = useContext(AuthContext);
   });
 
   const onSubmit = async (data) => {
-    // setSubmitting(true);
-    // setLoginError(null);
+    setSubmitting(true);
+    
     const parsedData = JSON.stringify(data)
     
     const options = {
@@ -32,35 +33,46 @@ const [, setAuth] = useContext(AuthContext);
 
     try {
       const response = await fetch(auth_url, options);
+      const json = await response.json();
 
       if (response.status === 400 ) {
-          throw new Error("Invalid email or password")
+        setLoginError("Invalid email or password");
+        
+      } else {
+        setAuth(json);
+        history("/");
+        setLoginError(null)
       }
-      const json = await response.json();
-      setAuth(json)
+      
+      
     } catch (error) {
       console.log('error', error);
       
     //   setLoginError(error.toString());
     } finally {
-        history("/");
-        
+        setSubmitting(false)
     }
   };
 
   return (
     <>
-      <div className='formbox'>
-      <form onSubmit={handleSubmit(onSubmit)}>
-            <input name='identifier' placeholder="Enter email" {...register("identifier")} />
+      <Container className='login-form'>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Row className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control name='identifier' placeholder="Enter email" {...register("identifier")} />
             {errors.identifier && <span>{errors.identifier.message}</span>}
+            <p>{loginError}</p>
+        </Row>
 
-            <input type="password" name='password' placeholder='Enter password'{...register("password")} />
+        <Row className="mb-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" name='password' placeholder='Enter password'{...register("password")} />
             {errors.password && <span></span>}
-
-            <button type='submit'>Send</button>
-        </form>
-      </div>
+        </Row>
+            <Button className='primary-button' type='submit'>{submitting ? "Logging in.." : "Log in"}</Button>
+        </Form>
+      </Container>
     </>
   );
 };

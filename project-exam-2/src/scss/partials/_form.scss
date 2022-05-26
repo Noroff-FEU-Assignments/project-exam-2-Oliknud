@@ -5,4 +5,9 @@ form {
     padding: 40px;
     max-width: 1000px;
     margin: 80px auto;
+
+    textarea {
+       resize: none;
+       height: 150px;
+    }
 }

@@ -5,7 +5,7 @@ import { AuthContext } from './authContext';
 import { deleteFunction } from "./deleteFunction";
 
 function AdminBookings() {
-    const [bookings, setBooking] = useState([]);
+    const [bookings, setBooking] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [auth] = useContext(AuthContext);
@@ -41,12 +41,23 @@ function AdminBookings() {
         return <div>Error</div>
       }
 
+      if (bookings.length === 0) {
+        return (
+          <>
+            <h4>Bookings</h4>
+            <p>No bookings..</p>
+          </>
+        )
+      }
+
     return (
         <Accordion defaultActiveKey="0" flush>
         <h4>Bookings</h4>
+        
         {bookings.map((booking) => {
           const bookingAttr = booking.attributes;
           const bookingNumber = bookings.indexOf(booking);
+          
           return (
             <Accordion.Item eventKey={booking.id} key={booking.id}>
                 <Accordion.Header>Booking {bookingNumber + 1}</Accordion.Header>
@@ -58,12 +69,8 @@ function AdminBookings() {
                     <p>Guests: {bookingAttr.guests}</p>
                     <p>Email: {bookingAttr.email}</p>
                     <p>Phone number: {bookingAttr.phone_number}</p>
-                    <button className='primary-button' onClick={() => {
-                        const deleteConfirmation = window.confirm("Delete booking?");
-                        if (deleteConfirmation) {
-                            deleteFunction(booking_url, booking.id, auth.jwt)}
-                        }
-                        }>Delete</button>
+                    <button className='primary-button' onClick={() => { 
+                      deleteFunction(booking_url, booking.id, auth.jwt)}}>Delete</button>
                 </Accordion.Body>
             </Accordion.Item>
           )

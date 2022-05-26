@@ -1,6 +1,10 @@
-.booking-form {
+.booking-form, .contact-form, .login-form {
     h1 {
         margin-bottom: 40px;
+    }
+
+    label {
+        padding: 0;
     }
 
     .btn {
@@ -9,4 +13,5 @@
         max-width: 300px;
         width: 100%;
     }
+
 }

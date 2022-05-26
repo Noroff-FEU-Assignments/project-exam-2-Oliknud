@@ -1,0 +1,22 @@
+.search-link {
+    color: white;
+    text-decoration: none;
+}
+
+.search-link:hover {
+    color: rgb(223, 223, 223);
+    text-decoration: none;
+}
+
+.hotel-search {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.418);
+    padding: 40px;
+    max-width: 800px;
+    width: 80%;
+    border-radius: 8px;
+    color: white;
+}

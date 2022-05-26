@@ -1,5 +1,5 @@
 import { React , useState, useEffect, useContext } from 'react'
-import { Container, Card} from "react-bootstrap";
+import { Container, Card, Button} from "react-bootstrap";
 import { url } from '../components/api';
 import AuthContext from './authContext';
 import { deleteFunction } from './deleteFunction';
@@ -39,20 +39,14 @@ function AdminHotelList() {
   
   return (
     <>
-      <Container>
+      <Container className='hotel-list'>
         {hotels.map(hotel => (
           <Card key={hotel.id} style={{ width: '18rem' }}>
           <Card.Img variant="top" src={hotel.attributes.image_url} />
           <Card.Body>
             <Card.Title>{hotel.attributes.hotel_name}</Card.Title>
             <Card.Text>Price: {hotel.attributes.price} kr</Card.Text>
-            <button onClick={() => {
-                const deleteConfirmation = window.confirm("Delete hotel?");
-                if (deleteConfirmation) {
-                    deleteFunction(url, hotel.id, auth.jwt);
-                    console.log(hotel.id)
-                }
-            }} className='delete-button'>Delete</button>
+            <Button onClick={() => { deleteFunction(url, hotel.id, auth.jwt); }} className='delete-button'>Delete</Button>
           </Card.Body>
           </Card>
         ))}

@@ -4,10 +4,12 @@ import { bookingSchema } from "../components/formSchema";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { booking_url, url } from '../components/api';
+import { Link } from 'react-router-dom';
 
 function Booking() {
     const [error, setError] = useState(null);
     const [hotels, setHotels] = useState([]);
+    const [submitting, setSubmitting] = useState(false);
     
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(bookingSchema)
@@ -30,7 +32,8 @@ function Booking() {
 
     const onSubmit = async (data) => {
         const parsedData = JSON.stringify({data:data})
-
+        setSubmitting(false);
+        
         const options = {
             method: "POST",
             body: parsedData,
@@ -41,12 +44,13 @@ function Booking() {
     
         try {
             await fetch(booking_url, options);
+            
         } 
         catch (error) {
             console.log('error', error);
         } 
         finally {
-            
+            setSubmitting(true);
         }
     };
 
@@ -88,7 +92,7 @@ function Booking() {
                 </Row>
 
                 <Row className="mb-3">
-                    <Form.Group as={Col} controlId="formGridHotelName">
+                    <Form.Group as={Col} controlId="formGridFullName">
                         <Form.Label>Full name</Form.Label>
                         <Form.Control placeholder="Enter full name" {...register("full_name")} />
                         {errors.full_name && <span>{errors.full_name.message}</span>}
@@ -114,16 +118,15 @@ function Booking() {
                         {errors.email && <span>{errors.email.message}</span>}
                     </Form.Group>
 
-                    <Form.Group as={Col} controlId="formGridZip">
+                    <Form.Group as={Col} controlId="formGridPhone">
                         <Form.Label>Phone number</Form.Label>
                         <Form.Control placeholder='Enter phone number' {...register("phone_number")} />
                         {errors.phone_number && <span>{errors.phone_number.message}</span>}
                     </Form.Group>
                 </Row>
 
-                <Button className='primary-button' type="submit">
-                    Submit
-                </Button>
+                <Button className={submitting ? "success-button" : "primary-button"} disabled={submitting ? true : false} type="submit">{submitting ? "Success" : "Book"}</Button>
+                <Link to={"/hotels"}>Go back</Link>
             </Form>
         </Container>
     )

@@ -40,8 +40,18 @@ function ContactMessages() {
         return <div>Error</div>
     }
 
+    if (contacts.length === 0) {
+      return (
+        <>
+          <h4>Contact messages</h4>
+          <p>No messages..</p>
+        </>
+      )
+    }
+
   return (
     <Accordion defaultActiveKey="0" flush>
+      <h4>Contact messages</h4>
         {contacts.map((contact) => {
           const contactAttr = contact.attributes;
           const contactNumber = contacts.indexOf(contact);
@@ -53,13 +63,7 @@ function ContactMessages() {
                     <p>Last name: {contactAttr.last_name}</p>
                     <p>Email: {contactAttr.email}</p>
                     <p>Message: {contactAttr.message}</p>
-                    <button className='primary-button' onClick={() => {
-                        const deleteConfirmation = window.confirm("Delete booking?");
-                        if (deleteConfirmation) {
-                            deleteFunction(contact_url, contact.id, auth.jwt)}
-                            console.log(contact_url, contact.id)
-                        }
-                        }>Delete</button>
+                    <button className='primary-button' onClick={() => { deleteFunction(contact_url, contact.id, auth.jwt)} }>Delete</button>
                 </Accordion.Body>
             </Accordion.Item>
           )

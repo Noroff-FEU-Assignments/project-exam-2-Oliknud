@@ -43,7 +43,7 @@ function Details() {
   }
   
   const hotel = data.data.attributes;
-  const hotell = data.data.attributes;
+  
   return (
     <>
       <Container className='hotel-details'>

@@ -11,23 +11,25 @@ function AdminHotelList() {
   const [auth] = useContext(AuthContext);
 
   useEffect(function () {
-    async function fetchData() {
-      try {
-        const res = await fetch(url);
-        if (res.ok) {
-          const json = await res.json();
-          setHotel(json.data);
-        } else {
-          setError("Error..");
-        }
-      } catch (error) {
-        setError(error.toString());
-      } finally {
-        setLoading(false);
-      }
-    }
+    
     fetchData();
   }, []);
+
+  async function fetchData() {
+    try {
+      const res = await fetch(url);
+      if (res.ok) {
+        const json = await res.json();
+        setHotel(json.data);
+      } else {
+        setError("Error..");
+      }
+    } catch (error) {
+      setError(error.toString());
+    } finally {
+      setLoading(false);
+    }
+  }
 
   if (loading) {
     return <div>Loading</div>
@@ -46,7 +48,12 @@ function AdminHotelList() {
           <Card.Body>
             <Card.Title>{hotel.attributes.hotel_name}</Card.Title>
             <Card.Text>Price: {hotel.attributes.price} kr</Card.Text>
-            <Button onClick={() => { deleteFunction(url, hotel.id, auth.jwt); }} className='delete-button'>Delete</Button>
+            <Button onClick={() => { 
+              deleteFunction(url, hotel.id, auth.jwt); 
+              setTimeout(() => {
+                fetchData()
+              }, 300);
+              }} className='delete-button'>Delete</Button>
           </Card.Body>
           </Card>
         ))}

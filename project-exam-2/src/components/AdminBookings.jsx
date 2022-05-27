@@ -5,34 +5,35 @@ import { AuthContext } from './authContext';
 import { deleteFunction } from "./deleteFunction";
 
 function AdminBookings() {
-    const [bookings, setBooking] = useState(null);
+    const [bookings, setBooking] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [auth] = useContext(AuthContext);
+
+    console.log(bookings)
     useEffect(() => {
-        const fetchBookings = async () => {
-          try {
-            const res = await fetch(booking_url);
-            const json = await res.json();
-    
-          if (res.ok) {
-            setBooking(json.data);
-          } else {
-            setError("Error..");
-          }
-            
-          } catch (error) {
-            setError(error.toString());
-            console.log(error)
-          } finally {
-            setLoading(false);
-          }
-        }
         fetchBookings();
       },[]);
 
+      const fetchBookings = async () => {
+        try {
+          const res = await fetch(booking_url);
+          const json = await res.json();
+  
+        if (res.ok) {
+          setBooking(json.data);
+        } else {
+          setError("Error..");
+        }
+          
+        } catch (error) {
+          setError(error.toString());
+          console.log(error)
+        } finally {
+          setLoading(false);
+        }
+      }
       
-
       if (loading) {
         return <div>Loading</div>
       }
@@ -70,7 +71,13 @@ function AdminBookings() {
                     <p>Email: {bookingAttr.email}</p>
                     <p>Phone number: {bookingAttr.phone_number}</p>
                     <button className='primary-button' onClick={() => { 
-                      deleteFunction(booking_url, booking.id, auth.jwt)}}>Delete</button>
+                    
+                      deleteFunction(booking_url, booking.id, auth.jwt)
+                      setTimeout(() => {
+                        fetchBookings()
+                      }, 300);
+                      
+                      }}>Delete</button>
                 </Accordion.Body>
             </Accordion.Item>
           )

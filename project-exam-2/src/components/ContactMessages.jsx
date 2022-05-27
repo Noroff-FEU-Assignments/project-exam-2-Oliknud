@@ -9,26 +9,28 @@ function ContactMessages() {
     const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
     useEffect(() => {
-        const fetchContact = async () => {
-          try {
-            const res = await fetch(contact_url);
-            const json = await res.json();
-    
-          if (res.ok) {
-            setContacts(json.data);
-          } else {
-            setError("Error..");
-          }
-            
-          } catch (error) {
-            setError(error.toString());
-          } finally {
-            setLoading(false);
-          }
-        }
         fetchContact();
       },[]);
+
+      const fetchContact = async () => {
+        try {
+          const res = await fetch(contact_url);
+          const json = await res.json();
+  
+        if (res.ok) {
+          setContacts(json.data);
+        } else {
+          setError("Error..");
+        }
+          
+        } catch (error) {
+          setError(error.toString());
+        } finally {
+          setLoading(false);
+        }
+      }
 
     
     
@@ -63,7 +65,12 @@ function ContactMessages() {
                     <p>Last name: {contactAttr.last_name}</p>
                     <p>Email: {contactAttr.email}</p>
                     <p>Message: {contactAttr.message}</p>
-                    <button className='primary-button' onClick={() => { deleteFunction(contact_url, contact.id, auth.jwt)} }>Delete</button>
+                    <button className='primary-button' onClick={() => { 
+                      deleteFunction(contact_url, contact.id, auth.jwt)
+                      setTimeout(() => {
+                        fetchContact()
+                      }, 300);
+                      } }>Delete</button>
                 </Accordion.Body>
             </Accordion.Item>
           )

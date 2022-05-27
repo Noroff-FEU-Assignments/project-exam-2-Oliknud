@@ -1,5 +1,6 @@
 export const deleteFunction = async (URL, id, auth) => {
     const data = JSON.stringify(URL, id);
+
     const options = {
         method: "DELETE",
         body: data,
@@ -14,8 +15,5 @@ export const deleteFunction = async (URL, id, auth) => {
     }
     catch (error) {
         console.log(error)
-    }
-    finally {
-        window.location.reload()
     }
 }

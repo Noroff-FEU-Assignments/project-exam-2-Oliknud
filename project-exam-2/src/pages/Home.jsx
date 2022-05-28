@@ -3,7 +3,7 @@ import { Container} from "react-bootstrap";
 import HotelCarousel from '../components/carousel';
 import { url } from '../components/api';
 import logo from "../images/logo.svg";
-import SearchFunction from '../components/searchFunction';
+import { Link } from 'react-router-dom';
 
 function Home() {
   const [hotels, setHotel] = useState([]);
@@ -40,19 +40,23 @@ function Home() {
 
   return (
     <>
-        <div className='home-hero-image'>
+            {/* <div className='hotel-search'>
+              <SearchFunction />
+            </div> */}
+          <div className='home-hero-image'>
           <img src={logo} className="front-logo" alt="logo" />
 
-            <div className='hotel-search'>
-              <SearchFunction />
-            </div>
+            
         </div>
 
         <Container className='featured'>
           <HotelCarousel />
           <Container className='featured-sub'>
             {hotels.filter(hotel => hotel.attributes.featured ? true : false).map(filteredHotel => (
-              <div className='home-featured' key={filteredHotel.id} ><img alt={filteredHotel.attributes.image_alt_text} src={filteredHotel.attributes.image_url}></img></div>
+              <div className='home-featured' key={filteredHotel.id} >
+                <Link to={`/hotel/${filteredHotel.id}`}><img alt={filteredHotel.attributes.image_alt_text} src={filteredHotel.attributes.image_url} /></Link>
+                <h5>{filteredHotel.attributes.hotel_name}</h5>
+                </div>
             ))}
           </Container>
         </Container>

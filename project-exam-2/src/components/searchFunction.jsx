@@ -7,7 +7,7 @@ function SearchFunction() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [query, setQuery] = useState("");
-    
+
     useEffect(function () {
         async function fetchData() {
         try {
@@ -36,8 +36,9 @@ function SearchFunction() {
     }
 
     return (
-        <>
-            <input className='form-control' placeholder='Search hotels..' onChange={event => setQuery(event.target.value)} />
+        <div className='search-bar'>
+            <input className={`form-control search-input ${!query ? "border-search" : ""}`} placeholder='Search hotels..' onChange={event => setQuery(event.target.value)} />
+            <div className={`search-result ${!query ? "hide-result" : ""}`}>
             {!query ? (
                 ""
             ) : (
@@ -47,15 +48,16 @@ function SearchFunction() {
                     return hotel;
                 } else if (hotel.attributes.hotel_name.toLowerCase().includes(query.toLowerCase())) {
                     return hotel;
-                }
+                } 
+                
                 return false;
             }).map((hotel) => (
                 <Link to={`/hotel/${hotel.id}`} className='search-link' key={hotel.id}>{hotel.attributes.hotel_name}</Link>
             ))}
             </>
             )}
-            
-        </>
+            </div>
+        </div>
     )
 }
 

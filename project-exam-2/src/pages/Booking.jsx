@@ -80,13 +80,13 @@ function Booking() {
 
                     <Form.Group as={Col} controlId="formGridDate">
                         <Form.Label>From</Form.Label>
-                        <input className='form-control' type="date" min={formatYmd(new Date())} {...register("from")} />
+                        <input className='form-control date-select' type="date" min={formatYmd(new Date())} {...register("from")} />
                         {errors.hotel_name && <span>{errors.hotel_name.message}</span>}
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridDate">
                         <Form.Label>To</Form.Label>
-                        <input className='form-control' type="date" min={formatYmd(new Date())} {...register("to")} />
+                        <input className='form-control date-select' type="date" min={formatYmd(new Date())} {...register("to")} />
                         {errors.hotel_name && <span>{errors.hotel_name.message}</span>}
                     </Form.Group>
                 </Row>

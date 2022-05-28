@@ -1,7 +1,23 @@
 .hotel-details {
     display: flex;
     flex-direction: column;
+
+    h1 {
+        margin-top: 80px;
+    }
+
+    .row {
+        margin-top: 20px;
+    }
+
     img {
-        margin: 80px auto;
+        max-width: 600px;
+        
+    }
+
+    .info-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 }

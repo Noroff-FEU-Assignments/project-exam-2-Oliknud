@@ -6,14 +6,13 @@
     height: 95vh;
     background-position-y: -40px;
     position: relative;
-    align-items: center;
     justify-content: center;
 }
 
 .front-logo {
     width: 300px;
-    top: 150px;
     position: absolute;
+    top: 250px;
 }
 
 .featured-sub {
@@ -24,6 +23,11 @@
     .home-featured {
         max-width: 300px;
         margin-top: 40px;
+
+        h5 {
+            text-align: center;
+        }
+
         img {
             border-radius: 8px;
             width: 100%;

@@ -11,3 +11,21 @@ form {
        height: 150px;
     }
 }
+
+.form-control:focus, .form-select:focus {
+    outline: none !important;
+    box-shadow: none;
+    border: 2px solid #212529;
+}
+
+.form-control, .form-select {
+    border: 2px solid #212529;
+}
+
+.form-select:hover, .date-select {
+    cursor: pointer;
+}
+
+.login-form {
+    max-width: 400px;
+}

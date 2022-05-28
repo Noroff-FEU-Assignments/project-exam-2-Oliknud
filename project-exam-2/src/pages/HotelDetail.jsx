@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { url } from "../components/api";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 
 function Details() {
   const [data, setData] = useState([]);
@@ -48,10 +48,20 @@ function Details() {
     <>
       <Container className='hotel-details'>
         <h1>{hotel.hotel_name}</h1>
-        <img src={hotel.image_url} alt={hotel.image_alt_text}/>
-        <p>{hotel.description}</p>
-        <p>{hotel.price} kr</p>
-        <Link to={`/booking`} className='primary-button'>Book hotel</Link>
+
+        <Row>
+          <Col>
+            <img src={hotel.image_url} alt={hotel.image_alt_text}/>
+          </Col>
+
+          <Col className='info-text'>
+            <div>
+              <p>{hotel.description}</p>
+              <h5>{hotel.price} kr</h5>
+            </div>
+            <Link to={`/booking`} className='primary-button'>Book hotel</Link>
+          </Col>
+        </Row>
       </Container>
     </>
   )

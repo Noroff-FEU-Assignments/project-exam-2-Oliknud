@@ -50,8 +50,9 @@ function Admin() {
   return (
     <>
       <Container>
-        <h1>Admin</h1>
+        
         <div className='admin-page row'>
+          <h1>Admin</h1>
           <div className='messages col'>
             <ContactMessages />
             <AdminBookings />

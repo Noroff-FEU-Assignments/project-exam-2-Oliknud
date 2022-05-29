@@ -19,7 +19,7 @@ function Booking() {
         resolver: yupResolver(bookingSchema)
     });
 
-    // Fetch hotel name for hotel select
+    
     useEffect(() => {
         async function fetchName() {
             try {
@@ -62,7 +62,6 @@ function Booking() {
         return <div>Error</div>
     }
 
-    // Dates before todays date deactivated
     const formatYmd = (date) => date.toISOString().slice(0, 10);
 
     return (

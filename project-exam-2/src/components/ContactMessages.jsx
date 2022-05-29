@@ -32,8 +32,6 @@ function ContactMessages() {
     }
   }
 
-
-
   if (loading) {
     return <div>Loading</div>
   }

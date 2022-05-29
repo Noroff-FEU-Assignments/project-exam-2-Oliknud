@@ -10,7 +10,6 @@ function AdminBookings() {
   const [error, setError] = useState(null);
   const [auth] = useContext(AuthContext);
 
-  console.log(bookings)
   useEffect(() => {
     fetchBookings();
   }, []);

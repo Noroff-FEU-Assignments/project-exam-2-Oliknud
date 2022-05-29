@@ -1,3 +1,4 @@
+@import "./partials/variables";
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
 
@@ -10,13 +11,11 @@
 @import "./partials/layout/footer";
 @import "./partials/layout/navigation";
 
+
 @import "./partials/form";
 @import "./partials/carousel";
 @import "./partials/button";
 @import "./partials/searchBar";
-
-
-$primary-color: #338EAB;
 
 body {
     background-color: #FCFCFC;

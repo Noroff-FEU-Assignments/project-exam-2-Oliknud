@@ -2,10 +2,13 @@
     top: 0;
     position: sticky;
     z-index: 1;
-    // background-color: rgb(253, 253, 253);
-    
+ 
     .nav-link {
         color: white !important;
+    }
+
+    .nav-link:hover {
+        color: rgb(196, 196, 196) !important;
     }
 }
 

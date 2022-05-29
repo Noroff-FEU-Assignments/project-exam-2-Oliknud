@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { url } from "../components/api";
+import { url } from "../components/utils/api";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Col, Container, Row } from 'react-bootstrap';
 
@@ -13,7 +13,7 @@ function Details() {
   })
 
   let history = useNavigate();
-  const {id} = useParams();
+  const { id } = useParams();
 
   if (!id) {
     history.push("/");
@@ -22,41 +22,40 @@ function Details() {
   const newUrl = url + "/" + id;
 
   useEffect(() => {
-      async function fetchData() {
-          try {
-            const res = await fetch(newUrl);
-            const json = await res.json();
-            setData(json)
-          }
-          catch (error) {
-              setError(error.toString());
-          }
-          finally {
-              setLoading(false);
-          }
+    async function fetchData() {
+      try {
+        const res = await fetch(newUrl);
+        const json = await res.json();
+        setData(json)
       }
-      fetchData();
+      catch (error) {
+        setError(error.toString());
+      }
+      finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
   }, [newUrl]);
 
   if (loading) {
-      return <div>Loading...</div>
+    return <div>Loading...</div>
   }
 
   if (error) {
-      return <div>{error}</div>
+    return <div>{error}</div>
   }
-  
+
   const hotel = data.data.attributes;
-  
+
   return (
     <>
-      
       <Container className='hotel-details'>
         <h1>{hotel.hotel_name}</h1>
 
         <Row>
           <Col>
-            <img src={hotel.image_url} alt={hotel.image_alt_text}/>
+            <img src={hotel.image_url} alt={hotel.image_alt_text} />
           </Col>
 
           <Col className='info-text'>

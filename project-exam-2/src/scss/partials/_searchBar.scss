@@ -1,3 +1,5 @@
+@import "./variables";
+
 .search-link {
     color: white;
     text-decoration: none;
@@ -25,14 +27,14 @@
     width: 100%;
     margin-top: 37px;
     background-color: white;
-    border-left: #212529 2px solid;
-    border-right: #212529 2px solid;
-    border-bottom: #212529 2px solid;
+    border-left: $secondaryColor 2px solid;
+    border-right: $secondaryColor 2px solid;
+    border-bottom: $secondaryColor 2px solid;
     border-radius: 0 0 8px 8px;
     padding: 0px 6px 12px;
 
     a {
-        color: #212529;
+        color: $secondaryColor;
         margin-top: 10px;
     }
 }

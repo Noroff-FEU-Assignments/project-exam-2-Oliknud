@@ -1,7 +1,6 @@
-.primary-button {
+.primary-button, .delete-button, .success-button {
     width: 200px;
     padding: 10px;
-    background-color: #338EAB;
     text-align: center;
     text-decoration: none;
     border: none;
@@ -10,41 +9,29 @@
     margin-top: 20px;
 }
 
+.primary-button {
+    background-color: $primaryColor;
+}
+
 .primary-button:hover {
-    background-color: #2d7a94;
+    background-color: #2b738b;
     color: white;
 }
 
 .delete-button {
-    width: 200px;
-    padding: 10px;
-    background-color: #ab3333;
-    text-align: center;
-    text-decoration: none;
-    border: none;
-    color: white;
-    border-radius: 8px;
-    margin-top: 20px;
+    background-color: $deleteColor;
 }
 
 .delete-button:hover {
-    background-color: #942d2d;
+    background-color: #832929;
     color: white;
 }
 
 .success-button {
-    width: 200px;
-    padding: 10px;
-    background-color: #11851a;
-    text-align: center;
-    text-decoration: none;
-    border: none;
-    color: white;
-    border-radius: 8px;
-    margin-top: 20px;
+    background-color: $successColor;
 }
 
 .success-button:disabled {
-    background-color: #11851a;
+    background-color: $successColor;
     color: white;
 }

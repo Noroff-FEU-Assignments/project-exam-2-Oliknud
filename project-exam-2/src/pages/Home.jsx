@@ -1,7 +1,7 @@
-import {React , useState, useEffect} from 'react'
-import { Container} from "react-bootstrap";
+import { React, useState, useEffect } from 'react'
+import { Container } from "react-bootstrap";
 import HotelCarousel from '../components/carousel';
-import { url } from '../components/api';
+import { url } from '../components/utils/api';
 import logo from "../images/logo.svg";
 import { Link } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ function Home() {
   const [hotels, setHotel] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   useEffect(() => {
     document.title = "Holidaze | Home"
   })
@@ -44,17 +44,17 @@ function Home() {
   return (
     <>
       <div className='home-hero-image'>
-        <img src={logo} className="front-logo" alt="logo" />   
+        <img src={logo} className="front-logo" alt="logo" />
       </div>
 
       <Container className='featured'>
-          <HotelCarousel />
-          <Container className='featured-sub'>
-            {hotels.filter(hotel => hotel.attributes.featured ? true : false).map(filteredHotel => (
-              <div className='home-featured' key={filteredHotel.id} >
-                <Link to={`/hotel/${filteredHotel.id}`}><img alt={filteredHotel.attributes.image_alt_text} src={filteredHotel.attributes.image_url} /></Link>
-                <h5>{filteredHotel.attributes.hotel_name}</h5>
-              </div>
+        <HotelCarousel />
+        <Container className='featured-sub'>
+          {hotels.filter(hotel => hotel.attributes.featured ? true : false).map(filteredHotel => (
+            <div className='home-featured' key={filteredHotel.id} >
+              <Link to={`/hotel/${filteredHotel.id}`}><img alt={filteredHotel.attributes.image_alt_text} src={filteredHotel.attributes.image_url} /></Link>
+              <h5>{filteredHotel.attributes.hotel_name}</h5>
+            </div>
           ))}
         </Container>
       </Container>

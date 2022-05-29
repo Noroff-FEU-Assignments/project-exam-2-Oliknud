@@ -1,9 +1,9 @@
-import { React, useEffect, useState }from 'react'
+import { React, useEffect, useState } from 'react'
 import { Container, Form, Row, Col, Button } from 'react-bootstrap';
-import { bookingSchema } from "../components/formSchema";
+import { bookingSchema } from "../components/utils/formSchema";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { booking_url, url } from '../components/api';
+import { booking_url, url } from '../components/utils/api';
 import { Link } from 'react-router-dom';
 
 function Booking() {
@@ -13,8 +13,8 @@ function Booking() {
 
     useEffect(() => {
         document.title = "Holidaze | Booking"
-      })
-    
+    })
+
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(bookingSchema)
     });
@@ -35,9 +35,9 @@ function Booking() {
     }, []);
 
     const onSubmit = async (data) => {
-        const parsedData = JSON.stringify({data:data})
+        const parsedData = JSON.stringify({ data: data })
         setSubmitting(false);
-        
+
         const options = {
             method: "POST",
             body: parsedData,
@@ -45,14 +45,14 @@ function Booking() {
                 "Content-Type": "application/json",
             }
         };
-    
+
         try {
             await fetch(booking_url, options);
-            
-        } 
+
+        }
         catch (error) {
             console.log('error', error);
-        } 
+        }
         finally {
             setSubmitting(true);
         }
@@ -77,7 +77,7 @@ function Booking() {
                             {hotels.map(hotel => (
                                 <option key={hotel.id}>{hotel.attributes.hotel_name}</option>
                             ))}
-                            
+
                         </Form.Select>
                         {errors.hotel_name && <span>{errors.hotel_name.message}</span>}
                     </Form.Group>

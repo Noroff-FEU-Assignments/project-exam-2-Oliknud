@@ -1,7 +1,7 @@
-import {React , useState, useEffect} from 'react'
-import {Link} from "react-router-dom";
-import { Container, Card} from "react-bootstrap";
-import { url } from '../components/api';
+import { React, useState, useEffect } from 'react'
+import { Link } from "react-router-dom";
+import { Container, Card } from "react-bootstrap";
+import { url } from '../components/utils/api';
 
 function Hotels() {
   const [hotels, setHotel] = useState([]);
@@ -42,30 +42,30 @@ function Hotels() {
 
   return (
     <Container className='hotels-main'>
-      
-        <Container className='hotel-list-search'>
-          <input className='form-control' placeholder='Search hotels..' onChange={event => setQuery(event.target.value)} />
-        </Container>
 
-        <Container className='hotel-list'>
+      <Container className='hotel-list-search'>
+        <input className='form-control' placeholder='Search hotels..' onChange={event => setQuery(event.target.value)} />
+      </Container>
+
+      <Container className='hotel-list'>
         {hotels.filter(hotel => {
-                if (query === "") {
-                    return hotel;
-                } else if (hotel.attributes.hotel_name.toLowerCase().includes(query.toLocaleLowerCase())) {
-                    return hotel;
-                }
-                return false;
-            }).map(hotel => (
-                <Card key={hotel.id} style={{ width: '18rem' }}>
-                  <Card.Img variant="top" src={hotel.attributes.image_url} />
-                  <Card.Body>
-                    <Card.Title>{hotel.attributes.hotel_name}</Card.Title>
-                    <Card.Text>Price: {hotel.attributes.price} kr</Card.Text>
-                    <Link to={`/hotel/${hotel.id}`} className='primary-button'>View</Link>
-                  </Card.Body>
-                </Card>
-            ))}           
-        </Container>
+          if (query === "") {
+            return hotel;
+          } else if (hotel.attributes.hotel_name.toLowerCase().includes(query.toLocaleLowerCase())) {
+            return hotel;
+          }
+          return false;
+        }).map(hotel => (
+          <Card key={hotel.id} style={{ width: '18rem' }}>
+            <Card.Img variant="top" src={hotel.attributes.image_url} />
+            <Card.Body>
+              <Card.Title>{hotel.attributes.hotel_name}</Card.Title>
+              <Card.Text>Price: {hotel.attributes.price} kr</Card.Text>
+              <Link to={`/hotel/${hotel.id}`} className='primary-button'>View</Link>
+            </Card.Body>
+          </Card>
+        ))}
+      </Container>
     </Container>
   )
 }

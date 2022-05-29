@@ -1,12 +1,12 @@
-import { React, useState, useEffect }from 'react'
+import { React, useState, useEffect } from 'react'
 import { Carousel } from 'react-bootstrap';
-import { url } from '../components/api';
+import { url } from './utils/api';
 
 function HotelCarousel() {
   const [hotels, setHotel] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
- 
+
   useEffect(function () {
     async function fetchData() {
       try {
@@ -34,17 +34,17 @@ function HotelCarousel() {
   if (error) {
     return <div>Error</div>
   }
-    
+
   return (
     <Carousel>
-        {hotels.filter(hotel => hotel.attributes.slide_image ? true : false).map(filteredHotel => (
-            <Carousel.Item key={filteredHotel.id}>
-                <img className="d-block w-100" src={filteredHotel.attributes.image_url} alt={filteredHotel.attributes.image_alt_text}/>
-                <Carousel.Caption>
-                    <h3>{filteredHotel.attributes.hotel_name}</h3>
-                </Carousel.Caption>
-            </Carousel.Item>
-        ))}
+      {hotels.filter(hotel => hotel.attributes.slide_image ? true : false).map(filteredHotel => (
+        <Carousel.Item key={filteredHotel.id}>
+          <img className="d-block w-100" src={filteredHotel.attributes.image_url} alt={filteredHotel.attributes.image_alt_text} />
+          <Carousel.Caption>
+            <h3>{filteredHotel.attributes.hotel_name}</h3>
+          </Carousel.Caption>
+        </Carousel.Item>
+      ))}
     </Carousel>
   )
 }

@@ -3,10 +3,30 @@
 }
 
 footer {
-    background-color: rgb(235, 235, 235);
+    background-color: $secondaryColor;
     margin-top: 80px;
-    padding: 80px 0;
+    padding: 60px 0;
     position: relative;
-  left: 0;
-  bottom: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.page-footer {
+  display: flex;
+  flex-direction: column;
+  color: white;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  a:hover {
+    color: rgb(165, 165, 165);
+  }
 }

@@ -1,14 +1,14 @@
 import React, { useContext, useEffect } from 'react'
 import { Container, Form, Row, Col, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import AuthContext from '../components/authContext'
+import AuthContext from '../components/utils/authContext'
 import AdminBookings from '../components/AdminBookings';
 import ContactMessages from '../components/ContactMessages';
-import { url } from '../components/api';
+import { url } from '../components/utils/api';
 import AdminHotelList from '../components/AdminHotelList';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { addHotelSchema } from "../components/formSchema";
+import { addHotelSchema } from "../components/utils/formSchema";
 
 function Admin() {
   const [auth] = useContext(AuthContext);
@@ -20,33 +20,33 @@ function Admin() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(addHotelSchema)
   });
-  
+
   let history = useNavigate();
 
   useEffect(() => {
-    if(!auth) {
+    if (!auth) {
       history("/login");
     }
-  },[auth, history]);
+  }, [auth, history]);
 
   const onSubmit = async (data) => {
-    const parsedData = JSON.stringify({data:data})
+    const parsedData = JSON.stringify({ data: data })
     const options = {
-        method: "POST",
-        body: parsedData,
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.jwt}`,
-        }
+      method: "POST",
+      body: parsedData,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${auth.jwt}`,
+      }
     };
 
     try {
-       await fetch(url, options);
-      
+      await fetch(url, options);
+
     } catch (error) {
       console.log('error', error);
-      
-    
+
+
     } finally {
       window.location.reload();
     }
@@ -61,15 +61,15 @@ function Admin() {
             <ContactMessages />
             <AdminBookings />
           </div>
-      
+
           <Container className='add-hotel-form col'>
-            
+
             <Form onSubmit={handleSubmit(onSubmit)}>
               <h4>Add hotel</h4>
               <Row className='mb-3'>
                 <Form.Group as={Col}>
                   <Form.Label>Hotel name</Form.Label>
-                  <input name='hotel_name' className='form-control' placeholder='Hotel name' {...register("hotel_name")}/>
+                  <input name='hotel_name' className='form-control' placeholder='Hotel name' {...register("hotel_name")} />
                   {errors.hotel_name && <span>{errors.hotel_name.message}</span>}
                 </Form.Group>
               </Row>
@@ -77,7 +77,7 @@ function Admin() {
               <Row className='mb-3'>
                 <Form.Group as={Col}>
                   <Form.Label>Description</Form.Label>
-                  <input name='description' className='form-control' placeholder='Description' {...register("description")}/>
+                  <input name='description' className='form-control' placeholder='Description' {...register("description")} />
                   {errors.description && <span>{errors.description.message}</span>}
                 </Form.Group>
               </Row>
@@ -109,7 +109,7 @@ function Admin() {
               <Row className='mb-3'>
                 <Form.Group>
                   <input type="checkbox" name="featured" {...register("featured")} />
-                  <Form.Label className='checkbox-label'>Featured</Form.Label>                  
+                  <Form.Label className='checkbox-label'>Featured</Form.Label>
                 </Form.Group>
 
                 <Form.Group>
@@ -118,11 +118,11 @@ function Admin() {
                 </Form.Group>
               </Row>
 
-                <Button type='submit' className='primary-button'>Add hotel</Button>
+              <Button type='submit' className='primary-button'>Add hotel</Button>
             </Form>
-          </Container>        
+          </Container>
         </div>
-        
+
         <AdminHotelList />
 
       </Container>

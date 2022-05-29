@@ -10,6 +10,10 @@ function Booking() {
     const [error, setError] = useState(null);
     const [hotels, setHotels] = useState([]);
     const [submitting, setSubmitting] = useState(false);
+
+    useEffect(() => {
+        document.title = "Holidaze | Booking"
+      })
     
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(bookingSchema)

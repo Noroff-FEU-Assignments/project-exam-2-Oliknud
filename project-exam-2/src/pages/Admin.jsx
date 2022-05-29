@@ -12,11 +12,16 @@ import { addHotelSchema } from "../components/formSchema";
 
 function Admin() {
   const [auth] = useContext(AuthContext);
-  console.log(auth);
-  let history = useNavigate();
+
+  useEffect(() => {
+    document.title = "Holidaze | Admin"
+  })
+
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(addHotelSchema)
   });
+  
+  let history = useNavigate();
 
   useEffect(() => {
     if(!auth) {
@@ -50,7 +55,6 @@ function Admin() {
   return (
     <>
       <Container>
-        
         <div className='admin-page row'>
           <h1>Admin</h1>
           <div className='messages col'>

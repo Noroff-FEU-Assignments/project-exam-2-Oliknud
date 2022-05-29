@@ -2,13 +2,16 @@ import {React , useState, useEffect} from 'react'
 import {Link} from "react-router-dom";
 import { Container, Card} from "react-bootstrap";
 import { url } from '../components/api';
-import searchIcon from "../images/search.svg";
 
 function Hotels() {
   const [hotels, setHotel] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    document.title = "Holidaze | Hotels"
+  })
 
   useEffect(function () {
     async function fetchData() {
@@ -39,6 +42,7 @@ function Hotels() {
 
   return (
     <Container className='hotels-main'>
+      
         <Container className='hotel-list-search'>
           <input className='form-control' placeholder='Search hotels..' onChange={event => setQuery(event.target.value)} />
         </Container>
@@ -60,8 +64,7 @@ function Hotels() {
                     <Link to={`/hotel/${hotel.id}`} className='primary-button'>View</Link>
                   </Card.Body>
                 </Card>
-            ))}
-            
+            ))}           
         </Container>
     </Container>
   )

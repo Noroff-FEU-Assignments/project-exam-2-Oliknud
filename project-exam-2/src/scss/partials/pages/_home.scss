@@ -19,11 +19,11 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    
     padding: 0;
     .home-featured {
         max-width: 300px;
-        margin-top: 40px;
-
+        margin: 40px auto 0;
         h5 {
             text-align: center;
         }

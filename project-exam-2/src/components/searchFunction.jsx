@@ -52,7 +52,7 @@ function SearchFunction() {
                 
                 return false;
             }).map((hotel) => (
-                <Link to={`/hotel/${hotel.id}`} className='search-link' key={hotel.id}>{hotel.attributes.hotel_name}</Link>
+                <Link onClick={() => setQuery(null)} to={`/hotel/${hotel.id}`} className='search-link' key={hotel.id}>{hotel.attributes.hotel_name}</Link>
             ))}
             </>
             )}

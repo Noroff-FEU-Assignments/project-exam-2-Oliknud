@@ -1,4 +1,4 @@
-import { React, useState }from 'react';
+import { React, useState, useEffect }from 'react';
 import { Container, Form, Row, Col, Button } from 'react-bootstrap';
 import { contact_url } from '../components/api';
 import { useForm } from 'react-hook-form';
@@ -7,6 +7,11 @@ import { contactSchema } from "../components/formSchema";
 
 function Contact() {
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    document.title = "Holidaze | Contact"
+  })
+
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(contactSchema)
   });

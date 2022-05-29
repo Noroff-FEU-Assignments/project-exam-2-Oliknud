@@ -1,8 +1,13 @@
-import React from 'react'
+import { React, useEffect }from 'react'
 
 function NotFound() {
+
+  useEffect(() => {
+    document.title = "Holidaze | Not found"
+  })
+
   return (
-    <div>NotFound</div>
+    <div>Not Found</div>
   )
 }
 

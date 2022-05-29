@@ -1,4 +1,4 @@
-import {  useContext, useState } from 'react';
+import {  useContext, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { auth_url } from '../components/api';
@@ -10,8 +10,13 @@ import { Container, Form, Row, Button } from 'react-bootstrap';
 const AdminLogin = () => {
   const [submitting, setSubmitting] = useState(false);
   const [loginError, setLoginError] = useState(null);
+  const [setAuth] = useContext(AuthContext);
 
-  const [, setAuth] = useContext(AuthContext);
+  useEffect(() => {
+    document.title = "Holidaze | Log in"
+  })
+
+  
   let history = useNavigate();
 
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -47,8 +52,6 @@ const AdminLogin = () => {
       
     } catch (error) {
       console.log('error', error);
-      
-    //   setLoginError(error.toString());
     } finally {
         setSubmitting(false)
     }

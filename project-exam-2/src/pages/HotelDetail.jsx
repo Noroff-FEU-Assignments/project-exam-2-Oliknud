@@ -8,6 +8,10 @@ function Details() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    document.title = "Holidaze | Hotel"
+  })
+
   let history = useNavigate();
   const {id} = useParams();
 
@@ -46,6 +50,7 @@ function Details() {
   
   return (
     <>
+      
       <Container className='hotel-details'>
         <h1>{hotel.hotel_name}</h1>
 

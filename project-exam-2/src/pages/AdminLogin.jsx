@@ -10,10 +10,10 @@ import { Container, Form, Row, Button } from 'react-bootstrap';
 const AdminLogin = () => {
   const [submitting, setSubmitting] = useState(false);
   const [loginError, setLoginError] = useState(null);
-  const [setAuth] = useContext(AuthContext);
+  const [,setAuth] = useContext(AuthContext);
 
   useEffect(() => {
-    document.title = "Holidaze | Log in"
+    document.title = "Holidaze | Log in";
   })
 
   

@@ -1,3 +1,13 @@
+<!-- -------------- -->
+Netlify:
+https://project-exam-2-oliknud.netlify.app/
+
+Github:
+https://github.com/Noroff-FEU-Assignments/project-exam-2-Oliknud
+
+<!-- -------------- -->
+
+
 # Project Exam 2
 There are two options with this Project Exam. 
 You need to only choose one and please follow the deliveries carefully.
